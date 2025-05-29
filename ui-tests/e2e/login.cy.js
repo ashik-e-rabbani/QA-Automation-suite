@@ -1,6 +1,6 @@
 import {loginPage} from '../pages/LoginPage'
 
-describe.skip('Login Tests', () => {
+describe('Login Tests', () => {
 
     beforeEach("Visit login page", () => {
         loginPage.visit();
