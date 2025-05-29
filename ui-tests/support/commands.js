@@ -23,3 +23,42 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+import{productPricingUtils} from '../support/utils/ProductPricingUtils'
+import {productsPage} from '../pages/ProductsPage';
+import {cartPage} from '../pages/CartPage';
+
+Cypress.Commands.add('addMinMaxPriceProductsToCart', () => {
+    const productNameWithPrice = [];
+    productsPage.getAllProducts().each(element => {
+        const name = element.find('.inventory_item_name').text().trim();
+         const priceText = element.find('.inventory_item_price').text().trim().replace('$', '');
+        const price = parseFloat(priceText);
+        // cy.log(name+" "+price)
+        productNameWithPrice.push({ name, price });
+    }).then(()=>{
+
+        let maxAndMinProducts = productPricingUtils.getMinAndMaxPrices(productNameWithPrice);
+        // cy.log(maxAndMinProducts)
+            for (let key in maxAndMinProducts) {
+                cy.log(`I am ${maxAndMinProducts[key].name}`);
+                cartPage.clickAddToCart(maxAndMinProducts[key].name,maxAndMinProducts[key].price)
+              }
+
+        cartPage.goToCart()
+
+        cy.get('[data-test="title"]').should('contain','Your Cart')
+
+        for (let key in maxAndMinProducts) {
+            // cy.contains('$'+maxAndMinProducts[key].price).should('be.visible') 
+            cy.contains('.inventory_item_name', maxAndMinProducts[key].name)
+            .parents('.cart_item_label')
+            .find('.inventory_item_price')
+            .should('have.text', '$'+maxAndMinProducts[key].price);
+          
+          }
+
+      
+  
+    })
+});
