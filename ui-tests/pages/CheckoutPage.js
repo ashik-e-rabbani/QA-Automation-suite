@@ -26,7 +26,7 @@ export class CheckoutPage {
 
 
     verifyOrderSuccessMessage() {
-        cy.get('[data-test="complete-header"]').should('contain','Thank you for your order!')
+        cy.get('[data-test="complete-header"]').should('contain','Thanks you for your order!')
     }
   }
   
