@@ -5,7 +5,8 @@ let userData;
 describe("Logging out",() => {
     before(()=>{
         loginPage.visit();
-        loginPage.login(Cypress.env('username'),Cypress.env('password'));
+        //Todo: replace login creds with env var
+        loginPage.login('standard_user','secret_sauce');
         cy.addMinMaxPriceProductsToCart();
         // Todo use fixture value
         // cy.fixture('users').then((data) => {
