@@ -5,8 +5,7 @@ import {logoutPage} from '../pages/LogoutPage'
 describe("Logging out",() => {
     before(()=>{
         loginPage.visit();
-        //Todo: replace login creds with env var
-        loginPage.login('standard_user','secret_sauce');
+        loginPage.login(Cypress.env('username'),Cypress.env('password'));
         cy.addMinMaxPriceProductsToCart();
         checkoutPage.initiate()
         checkoutPage.fillUpUserInfo()
