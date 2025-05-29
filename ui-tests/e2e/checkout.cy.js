@@ -6,8 +6,7 @@ let userData;
 describe("Checking out items",() => {
     before(()=>{
         loginPage.visit();
-        //Todo: replace login creds with env var
-        loginPage.login('standard_user','secret_sauce');
+        loginPage.login(Cypress.env('username'),Cypress.env('password'));
         cy.addMinMaxPriceProductsToCart();
         cy.fixture('users').then((data) => {
             userData = data;
