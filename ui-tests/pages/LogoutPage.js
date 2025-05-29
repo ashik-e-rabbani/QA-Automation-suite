@@ -6,7 +6,7 @@ class LogoutPage {
       cy.get('#login-button').click();
     }
 
-    initiate(){
+    doLogout(){
         cy.get('#react-burger-menu-btn').click()
         cy.get('#logout_sidebar_link').should('be.visible');
         cy.get('#logout_sidebar_link').click();

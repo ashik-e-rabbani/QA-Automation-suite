@@ -46,11 +46,9 @@ Cypress.Commands.add('addMinMaxPriceProductsToCart', () => {
               }
 
         cartPage.goToCart()
-
-        cy.get('[data-test="title"]').should('contain','Your Cart')
+        cartPage.validatePage()
 
         for (let key in maxAndMinProducts) {
-            // cy.contains('$'+maxAndMinProducts[key].price).should('be.visible') 
             cy.contains('.inventory_item_name', maxAndMinProducts[key].name)
             .parents('.cart_item_label')
             .find('.inventory_item_price')

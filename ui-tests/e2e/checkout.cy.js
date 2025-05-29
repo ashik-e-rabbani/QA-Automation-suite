@@ -16,12 +16,12 @@ describe("Checking out items",() => {
     it("Checkout products", () => {
         cy.log(userData)
         const { name, email, postalCode } = userData.validUser
-        checkoutPage.initiate()
-        checkoutPage.fillUpUserInfo(name, email, postalCode)
-        checkoutPage.continue()
-        //validate shipping total price etccc
+        checkoutPage.startCheckout()
+        checkoutPage.fillCheckoutForm(name, email, postalCode)
+        checkoutPage.clickContinue()
+        checkoutPage.validateOrder()
         checkoutPage.finishCheckout()
-        //make sure website ekta thanks diche
+        checkoutPage.verifyOrderSuccessMessage()
     })
 
 })

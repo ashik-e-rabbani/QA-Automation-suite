@@ -6,7 +6,7 @@ describe('Login Tests', () => {
         loginPage.visit();
     })
 
-    it("should display username, password, and login button", () => {
+    it("should show login form elements", () => {
         loginPage.validateLoginPageUI()
     })
 

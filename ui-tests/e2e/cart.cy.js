@@ -1,4 +1,5 @@
 import {loginPage} from '../pages/LoginPage'
+import {cartPage} from '../pages/CartPage';
 
 describe('Finding and adding lowest and highest priced product to cart', () => {
   before(() => {
@@ -10,7 +11,7 @@ describe('Finding and adding lowest and highest priced product to cart', () => {
   
   it('Finding and adding lowest and highest priced product', () => {
         cy.addMinMaxPriceProductsToCart();
-        cy.get('.shopping_cart_badge').should('have.text', '2');
+        cartPage.validateCartItems()
 
   });
   
