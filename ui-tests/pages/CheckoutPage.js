@@ -3,10 +3,10 @@ export class CheckoutPage {
         cy.get('#checkout').click()
     }
 
-    fillUpUserInfo() {
-        cy.get('[data-test="firstName"]').type("bbba")
-        cy.get('[data-test="lastName"]').type('bbb')
-        cy.get('[data-test="postalCode"]').type('123')
+    fillUpUserInfo(name, email, postalCode) {
+        cy.get('[data-test="firstName"]').type(name)
+        cy.get('[data-test="lastName"]').type(email)
+        cy.get('[data-test="postalCode"]').type(postalCode)
 
     }
 

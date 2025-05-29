@@ -1,0 +1,11 @@
+{
+  "validUser": {
+    "name": "Ashik Rabbani",
+    "email": "ashik@rabbani.com",
+    "postalCode": "NSW 1214"
+  },
+  "invalidUser": {
+    "username": "locked_out_user",
+    "password": "wrong_password"
+  }
+}
