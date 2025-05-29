@@ -5,13 +5,13 @@ module.exports = defineConfig({
   defaultCommandTimeout: 15000,
   pageLoadTimeout: 60000,
   requestTimeout: 10000,
-  // reporter: 'mochawesome',
-  // reporterOptions: {
-  //   reportDir: 'ui-tests/reports',
-  //   overwrite: true,
-  //   html: true,
-  //   json: true,
-  // },
+  reporter: 'mochawesome',
+  reporterOptions: {
+    reportDir: 'ui-tests/reports',
+    overwrite: true,
+    html: false,
+    json: false,
+  },
 
   env: {
     username: process.env.CYPRESS_username || 'standard_user',
