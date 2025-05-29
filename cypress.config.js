@@ -6,8 +6,8 @@ module.exports = defineConfig({
   pageLoadTimeout: 60000,
   requestTimeout: 5000,
   env: {
-    username: process.env.CYPRESS_username || 'Declare in .env',
-    password: process.env.CYPRESS_password || 'Check .env',
+    username: process.env.CYPRESS_username || 'standard_user',
+    password: process.env.CYPRESS_password || 'secret_sauce',
     baseUrl: process.env.CYPRESS_baseUrl || 'https://www.saucedemo.com'
   },
   e2e: {
