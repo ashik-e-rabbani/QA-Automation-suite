@@ -2,6 +2,9 @@ const { defineConfig } = require("cypress");
 require('dotenv').config();
 
 module.exports = defineConfig({
+  defaultCommandTimeout:15000,
+  pageLoadTimeout: 60000,
+  requestTimeout: 5000,
   env: {
     username: process.env.CYPRESS_username || 'Declare in .env',
     password: process.env.CYPRESS_password || 'Check .env',
