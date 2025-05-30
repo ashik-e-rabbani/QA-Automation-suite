@@ -1,0 +1,432 @@
+{
+	"info": {
+		"_postman_id": "24681686-f4cd-4eda-9d90-a7cd9ce160f4",
+		"name": "Simple_Grocery_Store_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33251515"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json();",
+							"let hasToken = jsonData.accessToken!=null;",
+							"",
+							"pm.test(\"Status code is 201_Created\", () =>{",
+							"    pm.response.to.have.status(201)",
+							"})",
+							"",
+							"pm.test(\"Response has returned an access token\", () => {",
+							"    pm.expect(hasToken).to.be.true;",
+							"    pm.expect(jsonData.accessToken).to.be.a(\"string\");",
+							"});",
+							"",
+							"pm.test(\"Token is parsable and saved to environment\",() => {",
+							"    ",
+							"    if(hasToken){",
+							"        pm.environment.set(\"accessToken\", jsonData.accessToken);",
+							"    }else{",
+							"        pm.expect.fail(\"No token returned in response\");",
+							"    }",
+							"    ",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const timestamp = Date.now();",
+							"const customerName = pm.environment.get(\"customerName\");",
+							"const clientEmail = `ashik_${timestamp}@gmail.com`;",
+							"console.log(`Test Data -> Name: ${customerName} & Email: ${clientEmail} `)",
+							"pm.environment.set(\"dynamicEmail\", clientEmail);",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"clientName\": \"{{customerName}}\",\n   \"clientEmail\": \"{{dynamicEmail}}\"\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api-clients",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api-clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve the list of products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let stockIsEmpty = true;",
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Verify response is not empty\", () => {",
+							"    const jsonData = pm.response.json();",
+							"    if (jsonData.length > 0) {",
+							"        stockIsEmpty = false;",
+							"    } else {",
+							"        pm.expect.fail(\"Response is empty.\");",
+							"    }",
+							"});",
+							"",
+							"pm.test(\"Check returned data KEY types are correct\", () => {",
+							"    const jsonData = pm.response.json();",
+							"    if (stockIsEmpty == false) {",
+							"        jsonData.forEach(product => {",
+							"            pm.expect(product.id).to.be.a(\"number\");",
+							"            pm.expect(product.category).to.be.a(\"string\");",
+							"            pm.expect(product.name).to.be.a(\"string\");",
+							"            pm.expect(product.inStock).to.be.a(\"boolean\");",
+							"        });",
+							"    } else {",
+							"        pm.expect.fail(\"Stock is Empty, Nothing to validate.\")",
+							"    }",
+							"",
+							"",
+							"});",
+							"",
+							"pm.test(\"Product ID is savable for later use\", () => {",
+							"    const jsonData = pm.response.json();",
+							"    if (stockIsEmpty == false) {",
+							"        //lets pick the first product",
+							"        pm.environment.set(\"productId\", jsonData[0].id);",
+							"",
+							"    } else {",
+							"        pm.expect.fail(\"Stock is Empty, Nothing to save.\")",
+							"    }",
+							"",
+							"",
+							"",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/products",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a cart",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json();",
+							"let hasCartId = jsonData.cartId != null;",
+							"pm.test(\"Status code is 201_Created\", () => {",
+							"    pm.response.to.have.status(201)",
+							"})",
+							"",
+							"pm.test(\"Cart creation is successful\", () => {",
+							"    pm.expect(jsonData.created).to.be.true;",
+							"})",
+							"",
+							"pm.test(\"Returns a valid CartId\", () => {",
+							"    hasCartId ? pm.expect(jsonData.cartId).to.be.a('string') : pm.expect.fail(\"No CartId returned in response\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"CartId is parsable and saved to environment\", () => {",
+							"    hasCartId ? pm.environment.set(\"cartId\", jsonData.cartId) : pm.expect.fail(\"No CartId returned in response\");",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/carts",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"carts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add items to cart",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json();",
+							"let hasitemId = jsonData.itemId != null;",
+							"",
+							"pm.test(\"Status code is 201_Created\", () => {",
+							"    pm.response.to.have.status(201)",
+							"});",
+							"",
+							"pm.test(\"Items added to cart successfully.\", () => {",
+							"    hasitemId ? pm.expect(jsonData.created).to.be.true : pm.expect.fail(\"No itemId returned in response\");",
+							"})",
+							"",
+							"pm.test(\"Storing of cart item id in environment variable\", () => {",
+							"    hasitemId ? pm.environment.set(\"itemId\", jsonData.itemId) : pm.expect.fail(\"No itemId returned in response\");",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"productId\": {{productId}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/carts/{{cartId}}/items",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"carts",
+						"{{cartId}}",
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json();",
+							"let hasOrderId = jsonData.orderId != null;",
+							"",
+							"pm.test(\"Status code is 201_Created\", () => {",
+							"    pm.response.to.have.status(201)",
+							"})",
+							"",
+							"pm.test(\"Order creation is successful.\", () => {",
+							"    hasOrderId ? pm.expect(jsonData.created).to.be.true : pm.expect.fail(\"No itemId returned in response\");",
+							"})",
+							"",
+							"pm.test(\"orderId is returned and parsed\", () => {",
+							"",
+							"    hasOrderId ? pm.environment.set(\"orderId\", jsonData.orderId) : pm.expect.fail(\"No orderId returned in response\");",
+							"",
+							"",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cartId\": \"{{cartId}}\",\n    \"customerName\": \"{{customerName}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/orders",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify the order details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"const item = jsonData.items ? jsonData.items[0] : null;",
+							"const productID = pm.environment.get(\"productId\");",
+							"const customerName = pm.environment.get(\"customerName\");",
+							"",
+							"console.log(`Order made by ${customerName} and item id was ${productID}`)",
+							"",
+							"pm.test(\"Status code is 200_OK\", () => {",
+							"    pm.response.to.have.status(200)",
+							"})",
+							"",
+							"pm.test(\"Customer name matches with order\", () => {",
+							"    pm.expect(jsonData.customerName).to.eql(customerName);",
+							"});",
+							"",
+							"pm.test(\"Order returns with a valid id\", () => {",
+							"    pm.expect(jsonData.id).to.be.a('string');",
+							"});",
+							"",
+							"",
+							"",
+							"pm.test(\"Order contains expected products\", () => {",
+							"    pm.expect(jsonData.items).to.be.an(\"array\").with.lengthOf(1);",
+							"});",
+							"",
+							"pm.test(\"Ordered products returns correctly \", () => {",
+							"    pm.expect(item.productId).to.eql(Number(productID));",
+							"",
+							"});",
+							"pm.test(\"Order's CREATED KEY is valid\", () => {",
+							"    pm.expect(jsonData.created).to.be.a('string');",
+							"});",
+							"",
+							"pm.test(\"Order's TIMESTAMP KEY is valid\", () => {",
+							"    pm.expect(jsonData.timestamp).to.be.a('number');",
+							"});",
+							"pm.test(\"Order has a valid processed status\", () => {",
+							"    pm.expect(jsonData.processed).to.be.a('boolean');",
+							"});",
+							"pm.test(\"Each product's quantity is correct \", () => {",
+							"",
+							"    pm.expect(item.quantity).to.eql(1);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/orders/{{orderId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders",
+						"{{orderId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
