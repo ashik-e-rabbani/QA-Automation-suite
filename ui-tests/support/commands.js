@@ -24,9 +24,12 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+import {loginPage} from '../pages/LoginPage'
 import{productPricingUtils} from '../support/utils/ProductPricingUtils'
 import {productsPage} from '../pages/ProductsPage';
 import {cartPage} from '../pages/CartPage';
+import {checkoutPage} from '../pages/CheckoutPage'
+import { checkoutData } from '../support/utils/DataProviderUtils';
 
 Cypress.Commands.add('addMinMaxPriceProductsToCart', () => {
     const productNameWithPrice = [];
@@ -60,3 +63,18 @@ Cypress.Commands.add('addMinMaxPriceProductsToCart', () => {
   
     })
 });
+
+Cypress.Commands.add('doLogin',() => {
+    loginPage.visit();
+    loginPage.login(Cypress.env('username'),Cypress.env('password'));
+});
+
+Cypress.Commands.add('doCheckout',() => {
+    const { name, email, postalCode } = checkoutData
+    checkoutPage.startCheckout()
+        checkoutPage.fillCheckoutForm(name, email, postalCode)
+        checkoutPage.clickContinue()
+        checkoutPage.validateOrder()
+        checkoutPage.finishCheckout()
+});
+

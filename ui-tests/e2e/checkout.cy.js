@@ -1,21 +1,15 @@
-import {loginPage} from '../pages/LoginPage'
 import {checkoutPage} from '../pages/CheckoutPage'
+import { checkoutData } from '../support/utils/DataProviderUtils';
 
-let userData;
 
-describe("Checking out items",() => {
+describe("login, adds min & max priced items to cart and completes checkout.",() => {
     before(()=>{
-        loginPage.visit();
-        loginPage.login(Cypress.env('username'),Cypress.env('password'));
-        cy.addMinMaxPriceProductsToCart();
-        cy.fixture('users').then((data) => {
-            userData = data;
-          });   
+        cy.doLogin();
+        cy.addMinMaxPriceProductsToCart();  
     })
 
     it("Checkout products", () => {
-        cy.log(userData)
-        const { name, email, postalCode } = userData.validUser
+        const { name, email, postalCode } = checkoutData
         checkoutPage.startCheckout()
         checkoutPage.fillCheckoutForm(name, email, postalCode)
         checkoutPage.clickContinue()
