@@ -2,8 +2,8 @@
 
 This repository contains
 
-1. A Cypress-based UI automation framework for the **product purchasing flow** on [SauceDemo](https://www.saucedemo.com/).
-2. API test of a postman collection via newman from CLI
+1. A Cypress based UI automation framework for the **product purchasing flow** on [SauceDemo](https://www.saucedemo.com/).
+2. API test of [Simple Grocery Store API](https://simple-grocery-api.store/) using newman
 3. Load test
 
 ### Environment Setup
@@ -13,7 +13,9 @@ This repository contains
 * Use an IDE like **Visual Studio Code** (recommended)
 
 
-### Getting Started
+
+### - Getting Started -
+
 
 #### Clone the Repository
 
@@ -45,9 +47,9 @@ CYPRESS_baseUrl=https://www.saucedemo.com
 
 ---
 
-### Running Tests
+### Running UI Tests
 
-#### Run UI Tests via CLI
+#### Run Tests via CLI
 
 ```bash
 npx cypress run
@@ -67,9 +69,9 @@ npx cypress open
 
 ---
 
-### API Testing with Newman
+### Running API Tests
 
-#### Run API Tests via CLI
+#### Run Tests via CLI
 
 ```bash
 newman run api-tests/Simple_Grocery_Store_API.postman_collection.json \
