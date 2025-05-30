@@ -7,7 +7,8 @@ on:
   pull_request:
 
 jobs:
-  cypress-run:
+  ui-tests:
+    name: Run cypress UI tests 
     runs-on: ubuntu-latest
 
     steps:
@@ -32,9 +33,10 @@ jobs:
           name: cypress-screenshots
           path: ui-tests/screenshots
 
-  newman-run:
+  api-tests:
+    name: Run API Tests
     runs-on: ubuntu-latest
-    needs: cypress-run
+    needs: ui-tests
 
     steps:
       - name: Checkout repository
