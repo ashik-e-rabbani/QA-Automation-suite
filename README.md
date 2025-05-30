@@ -1,50 +1,62 @@
-## Environment Settings
+## QA Automation Suite
 
-- Setup Node.Js(LTE version) on your machine or Server
-- Make sure git is installed
-- IDE (Visual Studio Code is prefferable)
+This repository contains
 
-## Cypress UI Automation Suite
+1. A Cypress-based UI automation framework for the **product purchasing flow** on [SauceDemo](https://www.saucedemo.com/).
+2. API test of a postman collection via newman from CLI
+3. Load test
 
-This repository contains a Cypress-based product purchasing flow's UI test automation framework for testing the [SauceDemo](https://www.saucedemo.com/) website. It follows best practices such as the Page Object Model (POM), custom commands, environment configuration, CI/CD integration, and test data management.
+### Environment Setup
 
----
+* Install **Node.js** (LTS version recommended)
+* Ensure **Git** is installed
+* Use an IDE like **Visual Studio Code** (recommended)
 
-## ⚙️ Setup Instructions
 
-#### 1. Clone the Repository
+### Getting Started
+
+#### Clone the Repository
 
 ```bash
 git clone https://github.com/ashik-e-rabbani/QA-Automation-suite
+```
+
+#### Navigate to the Project Directory
+
+```bash
 cd QA-Automation-suite
 ```
 
-#### 2. Install Dependencies
+#### Install Project Dependencies
 
 ```bash
 npm install
 ```
 
-#### 3. Set Environment Variables
+#### Configure Environment Variables
 
-Create a `.env` file in the root directory:
+Create a `.env` file in the project root:
 
 ```env
 CYPRESS_username=<YOUR_USERNAME>
-CYPRESS_password=<YOUR_PASS>
+CYPRESS_password=<YOUR_PASSWORD>
 CYPRESS_baseUrl=https://www.saucedemo.com
 ```
 
-> ⚠️ **Important:** Do not commit `.env` to version control. Add it to `.gitignore`.
-
 ---
 
-## Running Tests
+### Running Tests
 
-#### Run All Tests in CLI
+#### Run UI Tests via CLI
 
 ```bash
 npx cypress run
+```
+
+Or use the NPM script:
+
+```bash
+npm run testUi
 ```
 
 #### Run Tests in Cypress Test Runner (GUI)
@@ -55,46 +67,60 @@ npx cypress open
 
 ---
 
-#### Test Reports
+### API Testing with Newman
 
-This project uses the [Mochawesome](https://github.com/adamgruber/mochawesome) reporter.
+#### Run API Tests via CLI
 
-Reports will be generated in:
-
+```bash
+newman run api-tests/Simple_Grocery_Store_API.postman_collection.json \
+       -e api-tests/sgsEnv.postman_environment.json
 ```
-ui-tests/reports/mochawesome.html
+
+Or via NPM script:
+
+```bash
+npm run testApi
 ```
 
-To view the report, open the HTML file in your browser.
+#### Run API Tests with HTML Report
+
+```bash
+newman run api-tests/Simple_Grocery_Store_API.postman_collection.json \
+       -e api-tests/sgsEnv.postman_environment.json \
+       -r htmlextra --reporter-htmlextra-export=api-tests/reports/api-test-report.html
+```
+
+Or use:
+
+```bash
+npm run testApiWithReport
+```
+
+### CI/CD Integration (GitHub Actions)
+
+Workflow automates:
+
+* Installing dependencies
+* Running Cypress tests (headless mode)
+* Capturing & uploading failure artifacts
+* Running Postman collections with Newman
+* Generating API test HTML reports
+* Load testing setup *(inprogress)*
+
+Workflow location: `.github/workflows/`
 
 ---
 
-## CI/CD Integration
+### Practices followed
 
-GitHub Actions workflow is used for CI.
-
-- Install dependencies
-- Run Cypress tests in headless mode
-- Upload screenshots and videos on failure (conditionally)
-- Generate test report
-
-> Check the `.github/workflows/` directory for the CI workflow file.
-
----
-
-## Practices Followed
-
-- ✅ Page Object Model (POM)
-- ✅ dotenv for secrets management
-- ✅ Fixtures for test data
-- ✅ Custom Cypress commands
-- ✅ CI/CD with GitHub Actions
-- ✅ Failure screenshot handling
-- ✅ Timeout configuration
-- ✅ Code modularization and reuse
+* Page Object Model (**POM** )
+* **dotenv** for secure config management
+* Reusable **fixtures** for test data
+* Custom Cypress **commands**
+* CI/CD via **GitHub Actions**
+* Failure **screenshot and video capture**
+* Modular and maintainable test structure
 
 ---
 
-## Contributors
-
-- **Ashik E Rabbani** – [Senior QA Engineer]
+by **Ashik E Rabbani**
