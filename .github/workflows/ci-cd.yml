@@ -8,7 +8,7 @@ on:
 
 jobs:
   ui-tests:
-    name: Run cypress UI tests 
+    name: Cypress UI tests 
     runs-on: ubuntu-latest
 
     steps:
@@ -34,7 +34,7 @@ jobs:
           path: ui-tests/screenshots
 
   api-tests:
-    name: Run API Tests
+    name: API Tests
     runs-on: ubuntu-latest
     needs: ui-tests
 
