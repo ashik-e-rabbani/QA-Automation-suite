@@ -31,3 +31,29 @@ jobs:
         with:
           name: cypress-screenshots
           path: ui-tests/screenshots
+
+  newman-run:
+    runs-on: ubuntu-latest
+    needs: cypress-run
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: '23'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Newman API tests with report via npm script
+        run: npm run testApiWithReport
+
+      - name: Upload Newman HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: newman-html-report
+          path: api-tests/reports/api-test-report.html 
+
