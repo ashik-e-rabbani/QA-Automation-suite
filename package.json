@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "testUi": "npx cypress run",
-    "testApi": "newman run api-tests/Simple_Grocery_Store_API.postman_collection.json -e api-tests/sgsEnv.postman_environment.json"
+    "testApi": "newman run api-tests/Simple_Grocery_Store_API.postman_collection.json -e api-tests/sgsEnv.postman_environment.json",
+    "testApiWithReport": "newman run api-tests/Simple_Grocery_Store_API.postman_collection.json -e api-tests/sgsEnv.postman_environment.json -r htmlextra --reporter-htmlextra-export=api-tests/reports/api-test-report.html"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,8 @@
     "dotenv": "^16.5.0",
     "mochawesome": "^7.1.3",
     "mochawesome-merge": "^5.0.0",
-    "mochawesome-report-generator": "^6.2.0"
+    "mochawesome-report-generator": "^6.2.0",
+    "newman": "^6.2.1",
+    "newman-reporter-htmlextra": "^1.23.1"
   }
 }
