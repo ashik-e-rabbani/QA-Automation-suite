@@ -10,12 +10,10 @@ This repository contains
 
 * Install **Node.js** (LTS version recommended)
 * Ensure **Git** is installed
+* Install [k6](https://grafana.com/docs/k6/latest/set-up/install-k6/) (MacOS: `brew install k6`)
 * Use an IDE like **Visual Studio Code** (recommended)
 
-
-
 ### - Getting Started -
-
 
 #### Clone the Repository
 
