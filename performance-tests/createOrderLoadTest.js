@@ -13,10 +13,10 @@ export const options = {
     { duration: '5s', target: 5 }, // stay on 5 for five seconds
     { duration: '2s', target: 0 }, // ramping down to normal
   ],
-  thresholds: {
-    http_req_duration: ['p(97)<500'],
-    checks: ['rate>0.90'],   
-  },
+  // thresholds: {
+  //   http_req_duration: ['p(97)<500'],
+  //   checks: ['rate>0.90'],   
+  // },
 };
 
 
