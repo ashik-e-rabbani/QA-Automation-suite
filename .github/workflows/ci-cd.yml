@@ -59,3 +59,25 @@ jobs:
           name: newman-html-report
           path: api-tests/reports/api-test-report.html 
 
+  k6-test:
+    name: Performance tests with K6
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install k6
+        run: |
+          sudo apt update
+          sudo apt install -y gnupg software-properties-common
+          sudo gpg -k || true
+          curl -s https://dl.k6.io/key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/k6-archive-keyring.gpg
+          echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+          sudo apt update
+          sudo apt install k6 -y
+
+      - name: Run k6 performance test
+        run: |
+          k6 run performance-tests/createOrderLoadTest.js
+
