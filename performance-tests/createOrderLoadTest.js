@@ -1,6 +1,11 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 import { config } from './config.js';
+import { Trend, Rate } from 'k6/metrics';
+
+export let fastResponseTrend = new Trend('response_time');
+export let standardResponseTrend = new Trend('response_time');
+export let errorRate = new Rate('failed_requests');
 
 export const options = {
   stages: [
@@ -23,10 +28,14 @@ export default function () {
 
   console.log(res.status)
 
+  //custom metric for evaluation
+  fastResponseTrend.add(res.timings.duration <= 300);
+  standardResponseTrend.add(res.timings.duration <= 505);
+  errorRate.add(res.status !== 200);
+
   check(res, {
     'status is success (201)': (r) => r.status === 201,
     'response time < 500ms': (r) => r.timings.duration < 500,
-    'Error found (4xx/5xx)': (r) => r.status >= 400,
   });
 
   sleep(1);
