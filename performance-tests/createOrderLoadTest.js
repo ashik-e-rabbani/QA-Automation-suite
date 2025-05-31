@@ -12,7 +12,11 @@ export const options = {
     { duration: '2s', target: 5 },   // zero to five in 2s
     { duration: '5s', target: 5 }, // stay on 5 for five seconds
     { duration: '2s', target: 0 }, // ramping down to normal
-  ]
+  ],
+  thresholds: {
+    http_req_duration: ['p(97)<500'],
+    checks: ['rate>0.90'],   
+  },
 };
 
 
@@ -26,7 +30,7 @@ export default function () {
 
   const res = http.post(config.post_order.apiUrl, payload, { headers });
 
-  console.log(res.status)
+  // console.log(res.status)
 
   //custom metric for evaluation
   fastResponseTrend.add(res.timings.duration <= 300);
