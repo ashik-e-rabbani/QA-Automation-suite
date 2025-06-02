@@ -4,7 +4,7 @@ describe("Logging out",() => {
     before(()=>{
         cy.doLogin();
         cy.addMinMaxPriceProductsToCart();
-        cy.doCheckout();
+        cy.doCheckout()
     })
 
     it("Logging out", () => {

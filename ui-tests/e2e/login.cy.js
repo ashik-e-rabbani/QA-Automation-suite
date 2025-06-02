@@ -11,13 +11,8 @@ describe('Login Tests', () => {
     })
 
     it("should login successfully with valid credentials", () => {
-        loginPage.login(Cypress.env('username'),Cypress.env('password'));
+        loginPage.login(Cypress.env('username'), Cypress.env('password'));
         loginPage.verifySuccessfulLogin()
     })
 
-
 })
-
-
-
-
