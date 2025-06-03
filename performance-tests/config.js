@@ -6,6 +6,10 @@ export const config = {
         cartId: 'SOv85Y1_hIlet4ap1vTfH',
         customerName: 'Error Facing User'
       }
+    },
+    response_time: {
+        "fullCycle":2000,
+        "regular": 700
     }
   };
   

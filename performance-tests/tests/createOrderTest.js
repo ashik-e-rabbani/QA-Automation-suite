@@ -2,6 +2,7 @@ import { sleep, check } from 'k6';
 import { createClient, getProducts, createCart, addItemToCart, createOrder } from '../utils/ApiHelpers.js';
 import { Trend, Rate } from 'k6/metrics';
 import {getOptions} from '../utils/PerfOptions.js'
+import { config } from '../config.js';
 
 export const createOrderFullTrend = new Trend('create_order_full_cycle_duration');
 export const createOrderOnlyTrend = new Trend('create_order_order_only_duration');
@@ -51,7 +52,7 @@ errorRate.add(orderRes.status !== 201);
 
     check(orderRes, {
       'Create order API | response status is 201': (r) => r.status === 201,
-      'Create order API | response time < 2000ms': (r) => r.timings.duration < 2000,
+      'Create order API | response time < 2s': (r) => r.timings.duration < config.response_time.fullCycle,
     });
   }
    else {
@@ -62,8 +63,8 @@ errorRate.add(orderRes.status !== 201);
   
     check(orderRes, {
       // 'Create order API | response status is 201': (r) => r.status === 201,
-      'Create order API | response status is not 201': (r) => r.status !== 201,
-      'Create order API | response time < 500ms': (r) => r.timings.duration < 500,
+      'Create order API(only) | response status is not 201': (r) => r.status !== 201,
+      'Create order API(0nly) | response time < 500ms': (r) => r.timings.duration < config.response_time.regular,
     });
   }
 

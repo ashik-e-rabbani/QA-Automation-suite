@@ -1,11 +1,21 @@
+import { config } from '../config.js';
+
 
 export function getOptions() {
-    const perfTestType = (__ENV.perfTestType || 'load').toLowerCase();
+    const perfTestType = (__ENV.type || 'load').toLowerCase();
     const fullCycle = String(__ENV.fullCycle || 'false').toLowerCase() === 'true';
   
     let stages = [];
   
-    if (perfTestType === 'spike') {
+    if(perfTestType === 'load'){
+
+        stages = [
+            { duration: '1s', target: 5 },
+            { duration: '5s', target: 5 },
+            { duration: '1s', target: 0 },
+          ];
+    }
+    else if (perfTestType === 'spike') {
       stages = [
         { duration: '2s', target: 1 },
         { duration: '1s', target: 50 },
@@ -25,7 +35,7 @@ export function getOptions() {
       ];
     }
   
-    const responseTimeThreshold = fullCycle ? 2000 : 600;
+    const responseTimeThreshold = fullCycle ? config.response_time.fullCycle : config.response_time.regular;
   
     return {
       stages,
