@@ -18,7 +18,8 @@ export default function () {
     const clientRes = createClient();
     const token = clientRes.json('accessToken');
     check(token, 
-      { 'Authentication | Obtained token successfully': (t) => typeof t === 'string' && t.length > 0 });
+      { 'Authentication | Obtained token successfully': (t) => typeof(t) === 'string' && t.length > 0 
+      });
   
     const productRes = getProducts();
     const products = productRes.json();
@@ -26,19 +27,19 @@ export default function () {
     
     if ( products.length > 0 && products[0].id) {
       productId = products[0].id;
-      console.log(`Type is ${typeof(productId)} and id is ${productId}`)
+      // console.log(`Type is ${typeof(productId)} and id is ${productId}`)
     }
     check(productId, 
-      { 'Get All products API | picking a product': (id) => typeof(id) == 'number'});
+      { 'Get All products API | picking a product': (id) =>  typeof(id)== 'number'});
   
     const cartRes = createCart(token);
     const cartId = cartRes.json('cartId');
     check(cartId, 
-      { 'Create Cart API | creation is successfull': (id) => typeof id === 'string' && id.length > 0 });
+      { 'Create Cart API | creation is successfull': (id) => typeof(id) == 'string' && id.length > 0 });
   
     const addItemRes = addItemToCart(cartId, productId, token);
     check(addItemRes, 
-      { 'Add products to Cart API | response status is 201': (r) => r.status === 201 });
+      { 'Add products to Cart API | response status is 201': (r) => r.status == 201 });
   
       const startOrder = Date.now();
       const orderRes = createOrder(cartId, token);
