@@ -11,6 +11,8 @@ class LogoutPage {
         cy.get('#logout_sidebar_link').should('be.visible');
         cy.get('#logout_sidebar_link').click();
     }
+
   }
+  
   export const logoutPage =  new LogoutPage();
   

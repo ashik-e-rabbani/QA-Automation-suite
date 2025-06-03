@@ -53,8 +53,8 @@ errorRate.add(orderRes.status !== 201);
    else {
     const orderRes = createOrder();
 
-createOrderOnlyTrend.add(orderRes.timings.duration);
-errorRate.add(orderRes.status !== 201);
+    createOrderOnlyTrend.add(orderRes.timings.duration);
+    errorRate.add(orderRes.status !== 201);
   
     check(orderRes, {
       // 'Create order API | response status is 201': (r) => r.status === 201,

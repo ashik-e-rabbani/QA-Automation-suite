@@ -1,4 +1,5 @@
 export class CartPage {
+  
     clickAddToCart(productName,productPrice) {
       cy.contains('.inventory_item', productName)
         .contains('Add to cart')
@@ -18,8 +19,6 @@ export class CartPage {
       cy.get('.shopping_cart_badge').should('have.text', '2');
 
     }
-
-    
 
   }
   

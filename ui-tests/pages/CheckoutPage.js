@@ -1,4 +1,5 @@
 export class CheckoutPage {
+
     startCheckout() {
         cy.get('#checkout').click()
     }
@@ -23,7 +24,6 @@ export class CheckoutPage {
     finishCheckout() {
         cy.get('[data-test="finish"]').click()
     }
-
 
     verifyOrderSuccessMessage() {
         cy.get('[data-test="complete-header"]').should('contain','Thank you for your order!')

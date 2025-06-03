@@ -1,5 +1,6 @@
 
 class LoginPage {
+
     visit() {
       cy.visit('/');
     }
@@ -22,6 +23,8 @@ class LoginPage {
         cy.get('#react-burger-cross-btn').click()
         cy.get('[data-test="title"]').should('contain','Products')
     }
+
   }
+  
   export const loginPage =  new LoginPage();
   

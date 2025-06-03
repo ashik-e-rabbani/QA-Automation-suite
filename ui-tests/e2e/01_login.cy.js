@@ -6,11 +6,11 @@ describe('Login Tests', () => {
         loginPage.visit();
     })
 
-    it("should show login form elements", () => {
+    it("Should show login form elements", () => {
         loginPage.validateLoginPageUI()
     })
 
-    it("should login successfully with valid credentials", () => {
+    it("Should login successfully with valid credentials", () => {
         loginPage.login(Cypress.env('username'), Cypress.env('password'));
         loginPage.verifySuccessfulLogin()
     })
