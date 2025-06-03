@@ -27,7 +27,6 @@ export default function () {
     
     if ( products.length > 0 && products[0].id) {
       productId = products[0].id;
-      // console.log(`Type is ${typeof(productId)} and id is ${productId}`)
     }
     check(productId, 
       { 'Get All products API | picking a product': (id) =>  typeof(id)== 'number'});
@@ -39,14 +38,9 @@ export default function () {
   
     const addItemRes = addItemToCart(cartId, productId, token);
     check(addItemRes, 
-      { 'Add products to Cart API | response status is 201': (r) => r.status == 201 });
+      { 'Products to Cart API | response status is 201': (r) => r.status == 201 });
   
-      const startOrder = Date.now();
       const orderRes = createOrder(cartId, token);
-      const endOrder = Date.now();
-
-console.log(`CO duration manual: ${endOrder - startOrder} ms`);
-console.log(`CO duration auto: ${orderRes.timings.duration} ms`);
 
 createOrderFullTrend.add(orderRes.timings.duration);
 errorRate.add(orderRes.status !== 201);
