@@ -1,4 +1,4 @@
-name: Run Cypress Tests
+name: Run automation Tests
 
 on:
   push:
@@ -23,10 +23,27 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run Cypress tests
-        run: npx cypress run
+      - name: Run ui-tests
+        run: npm run testUi
 
-      - name: Upload test artifacts
+      - name: Merge json reports
+        run: npm run report:merge
+
+      - name: Convert json to HTML
+        run: npm run report:generate
+
+      - name: Zip HTML Report
+        run: |
+          mkdir -p artifacts
+          zip -r artifacts/ui-tests-report.zip ui-tests/reports/html
+
+      - name: Upload UI-tests Report
+        uses: actions/upload-artifact@v4
+        with:
+            name: cypress-html-report
+            path: artifacts/ui-tests-report.zip
+
+      - name: Upload failure screenshots
         if: failure()
         uses: actions/upload-artifact@v4
         with:
@@ -56,7 +73,7 @@ jobs:
       - name: Upload Newman HTML report
         uses: actions/upload-artifact@v4
         with:
-          name: newman-html-report
+          name: API-tests-report
           path: api-tests/reports/api-test-report.html 
 
   k6-test:
