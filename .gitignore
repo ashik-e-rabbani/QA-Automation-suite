@@ -6,3 +6,4 @@ api-tests/reports/api-test-report.html
 /performance-tests/samples
 loadresult.json
 performance-tests/result/output.json
+performance-tests/test_summary.json
