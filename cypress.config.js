@@ -1,16 +1,18 @@
 const { defineConfig } = require("cypress");
 require('dotenv').config();
 
+
 module.exports = defineConfig({
   defaultCommandTimeout: 15000,
   pageLoadTimeout: 60000,
   requestTimeout: 10000,
-  reporter: 'mochawesome',
+  reporter: 'cypress-mochawesome-reporter',
   reporterOptions: {
-    reportDir: 'ui-tests/reports',
-    overwrite: true,
-    html: false,
-    json: false,
+    reportDir: 'ui-tests/reports/html',
+    overwrite: false,
+    html: true,
+    json: true,
+    timestamp: 'ddmmyyyy_HHMMss',
   },
 
   env: {
@@ -27,7 +29,8 @@ module.exports = defineConfig({
     screenshotsFolder: 'ui-tests/screenshots',
     videosFolder: 'ui-tests/videos',
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      // require('cypress-mochawesome-reporter/plugin')(on);
+      // return config;
     },
   },
 });
