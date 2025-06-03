@@ -7,3 +7,4 @@ api-tests/reports/api-test-report.html
 loadresult.json
 performance-tests/result/output.json
 performance-tests/test_summary.json
+/temp
