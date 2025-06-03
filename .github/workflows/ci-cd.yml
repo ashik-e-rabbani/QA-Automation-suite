@@ -79,5 +79,5 @@ jobs:
 
       - name: Run k6 performance test
         run: |
-          npm run testLoadFull
+          npm run testLoad
 
