@@ -3,6 +3,6 @@ const loginSelectors = {
     passwordField: '[data-test="password"]',
     loginButton: '[data-test="login-button"]',
     errorMessage: '[data-test="error"]'
-  };
+};
 
-  export {loginSelectors}
+export {loginSelectors}
