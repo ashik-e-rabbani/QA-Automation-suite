@@ -9,7 +9,7 @@ export const config = {
     },
     response_time: {
         "fullCycle":2000,
-        "regular": 700
+        "regular": 1000
     }
   };
   
