@@ -1,7 +1,7 @@
 import {loginPage} from '../pages/LoginPage'
 import {cartPage} from '../pages/CartPage';
 
-describe('Finding and adding lowest and highest priced product to cart', () => {
+describe('Picking products and adding them to Cart', () => {
   before(() => {
     loginPage.visit();
     loginPage.login(Cypress.env('username'),Cypress.env('password'));
@@ -9,7 +9,7 @@ describe('Finding and adding lowest and highest priced product to cart', () => {
   });
 
   
-  it('Finding and adding lowest and highest priced product', () => {
+  it('Adding lowest and highest priced product', () => {
         cy.addMinMaxPriceProductsToCart();
         cartPage.validateCartItems()
 

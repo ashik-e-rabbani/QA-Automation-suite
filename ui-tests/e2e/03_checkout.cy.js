@@ -1,13 +1,13 @@
 import {checkoutPage} from '../pages/CheckoutPage'
 import {checkoutData} from '../support/utils/DataProviderUtils';
 
-describe("login, adds min & max priced items to cart and completes checkout.", () => {
+describe("Complete checkout with min & max priced items", () => {
     before(() => {
         cy.doLogin();
         cy.addMinMaxPriceProductsToCart();
     })
 
-    it("Checkout products", () => {
+    it("Successfully completes the checkout process", () => {
         const {name, email, postalCode} = checkoutData
         checkoutPage.startCheckout()
         checkoutPage.fillCheckoutForm(name, email, postalCode)

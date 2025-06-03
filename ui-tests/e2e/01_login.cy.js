@@ -1,6 +1,6 @@
 import {loginPage} from '../pages/LoginPage'
 
-describe('Login Tests', () => {
+describe('User Login Functionality', () => {
 
     beforeEach("Visit login page", () => {
         loginPage.visit();
