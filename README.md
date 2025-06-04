@@ -30,7 +30,7 @@ qa-candidate-assessment/
 ├── ui-tests/                # Cypress tests and configurations
 ├── cypress.config.js        # Cypress configuration file
 ├── package.json             # Project dependencies and scripts
-├── sample.env               # environment variables (you need to create .env)
+├── sample.env               # environment variables (you need to create .env in root directory)
 └── README.md                # Project documentation
 ```
 
