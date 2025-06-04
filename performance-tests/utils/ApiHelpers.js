@@ -5,7 +5,7 @@ const BASE_URL = __ENV.k6_baseUrl || 'https://simple-grocery-api.store';
 
 export function createClient() {
     return http.post(`${BASE_URL}/api-clients`, JSON.stringify({
-        clientName: 'Test Client',
+        clientName: 'Ashik Test',
         clientEmail: `ashik_${Math.floor(Math.random() * 1000000)}@gmail.com`
     }), {
         headers: {

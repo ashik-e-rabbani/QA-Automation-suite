@@ -10,9 +10,9 @@ export function getOptions() {
     if (perfTestType === 'load') {
 
         stages = [
-            { duration: '1s', target: 5 },
+            { duration: '2s', target: 5 },
             { duration: '5s', target: 5 },
-            { duration: '1s', target: 0 },
+            { duration: '2s', target: 0 },
         ];
     }
     else if (perfTestType === 'spike') {
@@ -25,6 +25,7 @@ export function getOptions() {
         stages = [
             { duration: '2s', target: 10 },
             { duration: '5s', target: 30 },
+            { duration: '5s', target: 40 },
             { duration: '3s', target: 0 },
         ];
     } else {
