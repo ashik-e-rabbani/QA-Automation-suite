@@ -88,12 +88,12 @@
 					"script": {
 						"exec": [
 							"let stockIsEmpty = true;",
+							"const jsonData = pm.response.json();",
 							"pm.test(\"Status code is 200\", () => {",
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
 							"pm.test(\"Verify response is not empty\", () => {",
-							"    const jsonData = pm.response.json();",
 							"    if (jsonData.length > 0) {",
 							"        stockIsEmpty = false;",
 							"    } else {",
@@ -102,7 +102,6 @@
 							"});",
 							"",
 							"pm.test(\"Check returned data KEY types are correct\", () => {",
-							"    const jsonData = pm.response.json();",
 							"    if (stockIsEmpty == false) {",
 							"        jsonData.forEach(product => {",
 							"            pm.expect(product.id).to.be.a(\"number\");",
@@ -117,8 +116,12 @@
 							"",
 							"});",
 							"",
+							"pm.test(\"All products are in stock\", () => {",
+							"    let allInStock = jsonData.every(p => p.inStock === true);",
+							"    pm.expect(allInStock).to.be.true;",
+							"});",
+							"",
 							"pm.test(\"Product ID is savable for later use\", () => {",
-							"    const jsonData = pm.response.json();",
 							"    if (stockIsEmpty == false) {",
 							"        //lets pick the first product",
 							"        pm.environment.set(\"productId\", jsonData[0].id);",
@@ -152,12 +155,18 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/products",
+					"raw": "{{baseUrl}}/products?available=true",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"products"
+					],
+					"query": [
+						{
+							"key": "available",
+							"value": "true"
+						}
 					]
 				}
 			},

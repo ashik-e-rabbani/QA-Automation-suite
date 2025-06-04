@@ -44,7 +44,8 @@ Ensure the following are installed on your system:
 
 - [Node.js (LTS version)](https://nodejs.org/)
 - [Git](https://git-scm.com/)
-- Use an IDE like **Visual Studio Code**
+- [k6](https://k6.io/) needs be installed in machine
+- Use an IDE like **Visual Studio Code**(optional)
 
 ---
 
