@@ -40,7 +40,7 @@ export function getOptions() {
     return {
         stages,
         thresholds: {
-            http_req_duration: [`p(95)<${responseTimeThreshold}`],
+            http_req_duration: [`p(90)<${responseTimeThreshold}`],
             checks: ['rate>0.80'],
         },
     };

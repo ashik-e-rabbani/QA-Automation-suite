@@ -15,7 +15,7 @@ export function createClient() {
 }
 
 export function getProducts() {
-  return http.get(`${BASE_URL}/products`);
+  return http.get(`${BASE_URL}/products?available=true`);
 }
 
 export function createCart(token) {
