@@ -1,10 +1,10 @@
 {
-    "name": "qa-automation-suite",
+    "name": "qa-candidate-assessment",
     "version": "1.0.0",
     "description": "Environment Settings - Setup Node.Js(LTE version) in your machine or Server - Git - IDE (Visual Studio Code is prefferable)",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "echo \"No test specified, available tests are testUi, testApi, and testLoadFull\" && exit 1",
         "testUi": "npx cypress run",
         "report:merge": "npx mochawesome-merge ui-tests/reports/html/.jsons/*.json > ui-tests/reports/html/.jsons/merged.json",
         "report:generate": "npx marge ui-tests/reports/html/.jsons/merged.json -f ui-tests-report -o ui-tests/reports/html",
@@ -17,15 +17,15 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/ashik-e-rabbani/QA-Automation-suite.git"
+        "url": "git+https://github.com/ashik-e-rabbani/qa-candidate-assessment.git"
     },
     "keywords": [],
     "author": "Ashik Rabbani",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/ashik-e-rabbani/QA-Automation-suite/issues"
+        "url": "https://github.com/ashik-e-rabbani/qa-candidate-assessment/issues"
     },
-    "homepage": "https://github.com/ashik-e-rabbani/QA-Automation-suite#readme",
+    "homepage": "https://github.com/ashik-e-rabbani/qa-candidate-assessment#readme",
     "devDependencies": {
         "cypress": "^14.4.0",
         "cypress-mochawesome-reporter": "^3.8.2",
