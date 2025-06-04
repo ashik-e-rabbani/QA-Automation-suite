@@ -69,11 +69,11 @@ Ensure the following are installed on your system:
 
 ---
 
-### Test Execution
+### Test Execution / Running tests locally
 
 #### 1. UI Tests (Cypress)
 
-##### Run Tests in headless mode
+##### Run tests in headless mode
 
 ```bash
 npx cypress run
@@ -85,10 +85,16 @@ Or use the NPM script:
 npm run testUi
 ```
 
-##### Run Tests in GUI mode
+##### Run tests in GUI mode
 
 ```bash
 npx cypress open
+```
+
+##### Run tests with report
+
+```bash
+npm run testUi && npm run report:merge && npm run report:generate
 ```
 
 #### 2. API Tests (Newman)
@@ -106,6 +112,8 @@ Or **via NPM script:**
 ```
 npm run testApi
 ```
+
+*Note: Those postman collections and environment json are exported from Postman.*
 
 ##### Run API Tests with HTML Report
 
@@ -151,5 +159,7 @@ Also can be run by: `npm run testLoadFull`
 * Running Postman collections with Newman
 * Running K6 performance tests
 * Generating Results and Report (Will be avaiable as downloadable in each actions)
+
 ---
+
 by **Ashik E Rabbani**
