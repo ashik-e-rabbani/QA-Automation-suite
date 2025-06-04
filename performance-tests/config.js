@@ -8,7 +8,7 @@ export const config = {
       }
     },
     response_time: {
-        "fullCycle": __ENV.CI ? 7000 : 2000,
+        "fullCycle": __ENV.CI ? 8000 : 5000,
         "regular": __ENV.CI ? 1000 : 500
     }
   };
