@@ -30,7 +30,7 @@ QA-Automation-suite/
 ├── ui-tests/                # Cypress tests and configurations
 ├── cypress.config.js        # Cypress configuration file
 ├── package.json             # Project dependencies and scripts
-├── sample.env               # Sample environment variables (you need to create .env)
+├── .env                     # environment variables (you need to create .env)
 └── README.md                # Project documentation
 ```
 
@@ -44,7 +44,7 @@ Ensure the following are installed on your system:
 
 - [Node.js (LTS version)](https://nodejs.org/)
 - [Git](https://git-scm.com/)
-- [k6](https://k6.io/) needs be installed in machine
+- [k6](https://k6.io/)
 - Use an IDE like **Visual Studio Code**(optional)
 
 ---
