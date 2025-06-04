@@ -23,14 +23,14 @@ This repository encompasses a comprehensive automation framework designed to val
 #### Project Structure
 
 ```
-QA-Automation-suite/
+qa-candidate-assessment/
 ├── .github/workflows/       # CI/CD workflows
 ├── api-tests/               # Postman collections and environment files
 ├── performance-tests/       # k6 scripts for load testing
 ├── ui-tests/                # Cypress tests and configurations
 ├── cypress.config.js        # Cypress configuration file
 ├── package.json             # Project dependencies and scripts
-├── .env                     # environment variables (you need to create .env)
+├── sample.env               # environment variables (you need to create .env)
 └── README.md                # Project documentation
 ```
 
@@ -54,9 +54,9 @@ Ensure the following are installed on your system:
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/ashik-e-rabbani/QA-Automation-suite.git
+   git clone https://github.com/ashik-e-rabbani/qa-candidate-assessment.git
    ```
-2. Change the Directory `cd QA-Automation-suite`
+2. Change the Directory `cd qa-candidate-assessment`
 3. **Install Dependencies**
 
    ```bash
@@ -139,7 +139,7 @@ Run load for the complete Cycle(Authenticate -> Pick products -> Add to carts ->
 k6 run performance-tests/tests/createOrderTest.js --env fullCycle=true --env type=load
 ```
 
-variable `fullCycle` can only be true, and type can be **`load`**, **`spike`** or **`stress`**
+variable `fullCycle` can only be **true**, and `type` can be **load**, **spike** or **stress**
 
 Also can be run by: `npm run testLoadFull`
 <br>
@@ -151,5 +151,5 @@ Also can be run by: `npm run testLoadFull`
 * Running Postman collections with Newman
 * Running K6 performance tests
 * Generating Results and Report (Will be avaiable as downloadable in each actions)
-  <br>
-  by **Ashik E Rabbani**
+---
+by **Ashik E Rabbani**
