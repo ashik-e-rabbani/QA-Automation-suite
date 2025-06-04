@@ -78,7 +78,9 @@ export default function () {
 
         //Trace the response time metric of POST/order API
         createOrderTrend.add(orderRes.timings.duration);
-        orderRes.status !== 201 ? apiErrorRate.add(true) : successRate.add(true)
+        orderRes.status !== 201
+            ? apiErrorRate.add(true)
+            : successRate.add(true)
 
         check(orderRes, {
             'Create order API | response status is 201': (r) => r.status === 201,
