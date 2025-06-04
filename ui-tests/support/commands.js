@@ -29,12 +29,9 @@ import {cartPage} from '../pages/CartPage';
 import {checkoutPage} from '../pages/CheckoutPage'
 import {checkoutData} from '../support/utils/DataProviderUtils';
 
-Cypress
-    .Commands
-    .add('addMinMaxPriceProductsToCart', () => {
+Cypress.Commands.add('addMinMaxPriceProductsToCart', () => {
         const productNameWithPrice = [];
-        productsPage
-            .getAllProducts()
+        productsPage.getAllProducts()
             .each(element => {
                 const name = element
                     .find('.inventory_item_name')
@@ -62,8 +59,7 @@ Cypress
                 cartPage.validatePage()
 
                 for (let key in maxAndMinProducts) {
-                    cy
-                        .contains('.inventory_item_name', maxAndMinProducts[key].name)
+                    cy.contains('.inventory_item_name', maxAndMinProducts[key].name)
                         .parents('.cart_item_label')
                         .find('.inventory_item_price')
                         .should('have.text', '$' + maxAndMinProducts[key].price);
@@ -73,16 +69,12 @@ Cypress
             })
     });
 
-Cypress
-    .Commands
-    .add('doLogin', () => {
+Cypress.Commands.add('doLogin', () => {
         loginPage.visit();
         loginPage.login(Cypress.env('username'), Cypress.env('password'));
     });
 
-Cypress
-    .Commands
-    .add('doCheckout', () => {
+Cypress.Commands.add('doCheckout', () => {
         const {name, email, postalCode} = checkoutData
         checkoutPage.startCheckout()
         checkoutPage.fillCheckoutForm(name, email, postalCode)

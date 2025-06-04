@@ -1,6 +1,6 @@
 import {logoutPage} from '../pages/LogoutPage'
 
-describe("User logout after completing checkout",() => {
+describe("User logged out after completing checkout",() => {
     before(()=>{
         cy.doLogin();
         cy.addMinMaxPriceProductsToCart();

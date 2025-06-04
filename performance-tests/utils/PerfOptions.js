@@ -41,8 +41,13 @@ export function getOptions() {
     return {
         stages,
         thresholds: {
+            create_order_response_times:[
+                `p(90)<${responseTimeThreshold}`,
+                `avg<${responseTimeThreshold}`
+            ],
+            create_order_success_rate:[`rate > 0.95`],
             http_req_duration: [`p(90)<${responseTimeThreshold}`],
-            checks: ['rate>0.80'],
+            checks: ['rate > 0.95'],
         },
     };
 }
