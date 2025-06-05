@@ -1,4 +1,4 @@
-## QA Automation Suite
+## QA candidate assessment (Automation Suite)
 
 This repository encompasses a comprehensive automation framework designed to validate the quality and performance of web applications. It contains:
 
@@ -30,7 +30,7 @@ qa-candidate-assessment/
 ├── ui-tests/                # Cypress tests and configurations
 ├── cypress.config.js        # Cypress configuration file
 ├── package.json             # Project dependencies and scripts
-├── sample.env               # environment variables (you need to create .env in root directory)
+├── sample.env               # environment variables (you need to create .env in root dir)
 └── README.md                # Project documentation
 ```
 
@@ -45,7 +45,7 @@ Ensure the following are installed on your system:
 - [Node.js (LTS version)](https://nodejs.org/)
 - [Git](https://git-scm.com/)
 - [k6](https://k6.io/)
-- Use an IDE like **Visual Studio Code**(optional)
+- Use an IDE like **Visual Studio Code** (optional)
 
 ---
 
@@ -56,7 +56,11 @@ Ensure the following are installed on your system:
    ```bash
    git clone https://github.com/ashik-e-rabbani/qa-candidate-assessment.git
    ```
-2. Change the Directory `cd qa-candidate-assessment`
+2. **Change the Directory**
+
+   ```
+   cd qa-candidate-assessment
+   ```
 3. **Install Dependencies**
 
    ```bash
@@ -158,7 +162,7 @@ Also can be run by: `npm run testLoadFull`
 * Running Cypress tests
 * Running Postman collections with Newman
 * Running K6 performance tests
-* Generating Results and Report (Will be avaiable as downloadable in each actions)
+* Generating Results and Report (Will be avaiable for download under each GHA)
 
 ---
 
