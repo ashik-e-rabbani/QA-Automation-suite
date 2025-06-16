@@ -93,7 +93,7 @@ export default function () {
         check(orderRes, {
             // 'Create order API | response status is 201': (r) => r.status === 201,
             'Create order API(only) | response status is not 201': (r) => r.status !== 201,
-            'Create order API(0nly) | response time < 500ms': (r) => r.timings.duration < config.response_time.regular
+            'Create order API(0nly) | response time': (r) => r.timings.duration < config.response_time.regular
         });
     }
 
